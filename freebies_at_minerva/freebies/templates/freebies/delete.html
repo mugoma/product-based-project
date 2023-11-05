@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Delete {{object.title}} Freebie{% endblock title %}
+
+{% block body %}
+<h1>Delete Freebie</h1>
+<p>Are you sure you want to delete this Freebie: <strong>{{object.title}}</strong>? If the details have changed, you can update it using
+    the button below.</p>
+<br>
+
+<form method="post">
+    {% csrf_token %}
+
+    <a class="btn btn-light" href="{% url 'freebies:detail' object.pk %}" role="button">Cancel</a>
+    <a class="btn btn-info" href="{% url 'freebies:update' object.pk %}" role="button">Update</a>
+    <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+{% endblock body %}
