@@ -16,21 +16,21 @@
                         Cities
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Berlin</a></li>
-                        <li><a class="dropdown-item" href="#">Buenos Aires</a></li>
-                        <li><a class="dropdown-item" href="#">Hyderabad</a></li>
-                        <li><a class="dropdown-item" href="#">London</a></li>
-                        <li><a class="dropdown-item" href="#">San Francisco</a></li>
-                        <li><a class="dropdown-item" href="#">Seoul</a></li>
-                        <li><a class="dropdown-item" href="#">Taipei</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=BERLIN">Berlin</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=BUENOS_AIRES">Buenos Aires</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=HYDERABAD">Hyderabad</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=LONDON">London</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=SAN_FRANCISCO">San Francisco</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=SEOUL">Seoul</a></li>
+                        <li><a class="dropdown-item" href="{% url 'freebies:search' %}?term=TAIPEI">Taipei</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'freebies:create' %}">Create Freebie</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" action="{% url 'freebies:search' %}">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="term">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

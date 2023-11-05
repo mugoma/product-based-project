@@ -1,9 +1,12 @@
 from typing import Any, Dict
+from django.db.models.query import QuerySet
+from django.db.models import Q
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 
 from .models import Freebie
+
 
 # Create your views here.
 
@@ -46,3 +49,15 @@ class FreebiesDeleteView(DeleteView):
     template_name = 'freebies/delete.html'
 
     success_url = reverse_lazy('freebies:list')
+
+
+class FreebiesSearchView(ListView):
+    template_name = 'freebies/list.html'
+
+    def get_queryset(self) -> QuerySet[Any]:
+        term = self.request.GET.get('term')
+        qs = Freebie.objects.all()
+        if term:
+            qs = qs.filter(Q(title__icontains=term) | Q(
+                description__icontains=term) | Q(city__icontains=term))
+        return qs
