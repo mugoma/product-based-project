@@ -44,6 +44,5 @@ class FreebiesUpdateView(FreebiesFormMixin, UpdateView):
 class FreebiesDeleteView(DeleteView):
     model = Freebie
     template_name = 'freebies/delete.html'
-    form_class = None
 
     success_url = reverse_lazy('freebies:list')
