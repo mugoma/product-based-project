@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
@@ -10,9 +11,15 @@ from .models import Freebie
 class FreebiesCreateView(CreateView):
     model = Freebie
     template_name = 'freebies/form.html'
+    fields = ['title', 'description', 'percentage_off', 'amount_off', 'city']
 
     def get_success_url(self) -> str:
-        return reverse('freebies:detail', args={"pk": self.get_object().pk})
+        return reverse('freebies:detail', args={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        data = super().get_context_data(**kwargs)
+        data['page_context'] = 'Create'
+        return data
 
 
 class FreebiesListView(ListView):
