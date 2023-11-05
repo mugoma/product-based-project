@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{object.title}} Freebie{% endblock title %}
+
+{% block body %}
+<h1>{{object.title}}</h1>
+<ul>
+    <li>
+        <strong>City: </strong> {{object.city}}
+    </li>
+    <br>
+    <li>
+        <strong>Date Added: </strong>{{object.added}}
+    </li>
+    <li>
+        <strong>Last Updated: </strong>{{object.updated}}
+    </li>
+    <li><strong>Views: </strong>{{object.views}}</li>
+</ul>
+<p>
+    {{object.description}}
+</p>
+<hr>
+<a class="btn btn-info" href="{% url 'freebies:update' object.pk %}" role="button">Update</a>
+<a class="btn btn-danger" href="{% url 'freebies:delete' object.pk %}" role="button">Delete</a>
+
+{% endblock body %}
