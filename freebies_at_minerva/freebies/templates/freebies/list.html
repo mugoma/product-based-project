@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Freebies At Minerva{% endblock title %}
+
+{% block body %}
+<h1>Freebies At Minerva</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">City</th>
+            <th scope="col">% Off</th>
+            <th scope="col">Amount Off</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for freebie in object_list %}
+        <tr>
+            <th scope="row">1</th>
+            <td>
+                <a href="{% url 'freebies:detail' freebie.pk %}">
+                    {{freebie.title}}
+                </a>
+            </td>
+            <td>{{freebie.city}}</td>
+            <td>{{freebie.percentage_off}} %</td>
+            <td>{{freebie.amount_off }}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock body %}
