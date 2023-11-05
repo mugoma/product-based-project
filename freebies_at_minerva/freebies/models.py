@@ -17,8 +17,8 @@ CITIES = [
 class Freebie(models.Model):
     title = models.TextField()
     description = models.TextField()
-    percentage_off = models.DecimalField(max_digits=3, decimal_places=1)
-    amount_off = models.DecimalField(max_digits=5, decimal_places=1)
+    percentage_off = models.DecimalField(max_digits=3, decimal_places=1, null=True)
+    amount_off = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
 
     city = models.TextField(choices=CITIES)
 
