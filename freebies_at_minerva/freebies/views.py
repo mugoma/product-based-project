@@ -8,18 +8,23 @@ from .models import Freebie
 # Create your views here.
 
 
-class FreebiesCreateView(CreateView):
+class FreebiesFormMixin:
     model = Freebie
     template_name = 'freebies/form.html'
     fields = ['title', 'description', 'percentage_off', 'amount_off', 'city']
+    page_context = None
 
     def get_success_url(self) -> str:
-        return reverse('freebies:detail', args={"pk": self.object.pk})
+        return reverse('freebies:detail', args=[self.object.pk])
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         data = super().get_context_data(**kwargs)
-        data['page_context'] = 'Create'
+        data['page_context'] = self.page_context
         return data
+
+
+class FreebiesCreateView(FreebiesFormMixin, CreateView):
+    page_context = 'Create'
 
 
 class FreebiesListView(ListView):
@@ -32,12 +37,8 @@ class FreebiesDetailView(DetailView):
     template_name = 'freebies/detail.html'
 
 
-class FreebiesUpdateView(UpdateView):
-    model = Freebie
-    template_name = 'freebies/form.html'
-
-    def get_success_url(self) -> str:
-        return reverse('freebies:detail', args={"pk": self.get_object().pk})
+class FreebiesUpdateView(FreebiesFormMixin, UpdateView):
+    page_context = 'Update'
 
 
 class FreebiesDeleteView(DeleteView):
